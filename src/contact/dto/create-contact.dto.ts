@@ -7,13 +7,8 @@ import {
   IsDateString,
   ArrayNotEmpty,
   IsArray,
+  IsNumber,
 } from 'class-validator';
-
-enum DocumentType {
-  ID_CARD = 'id_card',
-  PASSPORT = 'passport',
-  DRIVER_LICENSE = 'driver_license',
-}
 
 enum PhoneType {
   LANDLINE = 'landline',
@@ -39,7 +34,7 @@ class PhoneDto {
   phoneNumber: string;
 
   @ApiProperty({
-    example: 'landline',
+    example: 1,
     enum: PhoneType,
     description: 'Phone type',
   })
@@ -60,13 +55,12 @@ export class CreateContactDto {
   lastName: string;
 
   @ApiProperty({
-    example: 'id_card',
-    enum: DocumentType,
+    example: 1,
     description: 'Document type',
   })
-  @IsEnum(DocumentType)
+  @IsNumber()
   @IsNotEmpty()
-  documentType: DocumentType;
+  documentType: number;
 
   @ApiProperty({ example: '123456789', description: 'Document number' })
   @IsString()

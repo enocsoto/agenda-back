@@ -19,7 +19,7 @@ export class Phones {
   phoneNumber: string;
 
   @Column('enum', { name: 'phone_type', enum: ['fijo', 'celular'] })
-  phoneType: 'fijo' | 'celular';
+  phoneType: string;
 
   @ManyToOne(() => Contacts, (contacts) => contacts.phones, {
     onDelete: 'NO ACTION',
