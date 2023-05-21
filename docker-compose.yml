@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  challenge-service:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'passWord'
+      MYSQL_PASSWORD: 'passWord'
+      MYSQL_DATABASE: 'agenda'
+      MYSQL_USER: 'fran'
+    expose:
+      - 3307
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./volumen:/var/lib/mysql
