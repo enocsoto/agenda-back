@@ -1,24 +1,24 @@
 import * as path from 'path';
-import { DataSource } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 import { config as envconf } from 'dotenv';
 envconf();
 
 import { readdirSync } from 'fs';
 
-const config = new DataSource({
+export const configDatasource: DataSourceOptions = {
   type: 'mysql',
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT),
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  entities: [path.resolve(`${__dirname}/../../**/**.entity{.ts,.js}`)],
+  entities: [`${__dirname}/../**/**/*.entity{.ts,.js}`],
   migrations: readdirSync(path.join(__dirname, '../migration')).map(
     (item) => `${path.join(__dirname, `../migration/${item}`)}`,
   ),
   migrationsTableName: 'migrations',
   logging: false,
   synchronize: false,
-});
+};
 
-export default config;
+export const datasource = new DataSource(configDatasource);
