@@ -7,18 +7,18 @@ import { readdirSync } from 'fs';
 
 export const configDatasource: DataSourceOptions = {
   type: 'mysql',
-  host: process.env.DB_HOST,
+  host: process.env.DB_HOST || 'db',
   port: parseInt(process.env.DB_PORT),
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
+  username: process.env.DB_USER || 'fran',
+  password: process.env.DB_PASSWORD || 'passWord',
+  database: process.env.DB_DATABASE || 'agenda',
   entities: [`${__dirname}/../**/**/*.entity{.ts,.js}`],
   migrations: readdirSync(path.join(__dirname, '../migration')).map(
     (item) => `${path.join(__dirname, `../migration/${item}`)}`,
   ),
   migrationsTableName: 'migrations',
   logging: false,
-  synchronize: false,
+  synchronize: true,
 };
 
 export const datasource = new DataSource(configDatasource);

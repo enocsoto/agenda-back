@@ -1,17 +1,22 @@
-version: '3.9'
+version: "3.7"
 
 services:
-  challenge-service:
-    image: mysql:8.0
-    restart: always
+  mysql:
+    container_name: 'db'
+    image: mysql
+    ports:
+      - '3306:3306'
     environment:
       MYSQL_ROOT_PASSWORD: 'passWord'
       MYSQL_PASSWORD: 'passWord'
       MYSQL_DATABASE: 'agenda'
       MYSQL_USER: 'fran'
-    expose:
-      - 3307
+
+  service:
+    container_name: 'api'
+    build:
+      context: .
     ports:
-      - "3307:3306"
-    volumes:
-      - ./volumen:/var/lib/mysql
+      - '3000:3000'
+    depends_on:
+      - mysql
