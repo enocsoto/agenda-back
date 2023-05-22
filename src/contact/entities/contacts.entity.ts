@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Addresses } from './addresses.entity';
 import { DocumentType } from './documentType.entity';
@@ -19,12 +20,7 @@ import { Phones } from './phones.entity';
 @Index('idx_document_number', ['documentNumber'], {})
 @Entity('contacts', { schema: 'agenda' })
 export class Contacts {
-  @Column('char', {
-    primary: true,
-    name: 'id',
-    length: 36,
-    default: () => "'uuid()'",
-  })
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column('varchar', { name: 'first_name', length: 50 })

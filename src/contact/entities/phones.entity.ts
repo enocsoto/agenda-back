@@ -1,15 +1,17 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Contacts } from './contacts.entity';
 
 @Index('fk_contact_phones', ['contactId'], {})
 @Entity('phones', { schema: 'agenda' })
 export class Phones {
-  @Column('char', {
-    primary: true,
-    name: 'id',
-    length: 36,
-    default: () => "'uuid()'",
-  })
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column('char', { name: 'contact_id', length: 36 })
