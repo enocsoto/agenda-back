@@ -11,12 +11,18 @@ services:
       MYSQL_PASSWORD: 'passWord'
       MYSQL_DATABASE: 'agenda'
       MYSQL_USER: 'fran'
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      retries: 10
+      interval: 5s
 
-  service:
+  node:
     container_name: 'api'
     build:
       context: .
+      dockerfile: Dockerfile-node
     ports:
       - '3000:3000'
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy

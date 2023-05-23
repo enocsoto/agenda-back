@@ -1,11 +1,13 @@
 import * as path from 'path';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { config as envconf } from 'dotenv';
+import { SeederOptions } from 'typeorm-extension';
+import { MainSeeder } from '../seeder/init';
 envconf();
 
 import { readdirSync } from 'fs';
 
-export const configDatasource: DataSourceOptions = {
+export const configDatasource: DataSourceOptions & SeederOptions = {
   type: 'mysql',
   host: process.env.DB_HOST || 'db',
   port: parseInt(process.env.DB_PORT),
@@ -19,6 +21,7 @@ export const configDatasource: DataSourceOptions = {
   migrationsTableName: 'migrations',
   logging: false,
   synchronize: true,
+  seeds: [MainSeeder],
 };
 
 export const datasource = new DataSource(configDatasource);

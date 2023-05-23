@@ -10,7 +10,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "npm run migration:r && nest start",
-    "start:dev": "nest start --watch",
+    "start:dev": "npm run seed && nest start h",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -22,7 +22,8 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:g": "npx typeorm-ts-node-commonjs migration:generate src/migration/prueba2 -d src/config/ormconfig-migrations.ts",
     "migration:r": "npx typeorm-ts-node-commonjs migration:run -d src/config/ormconfig-migrations.ts",
-    "migration:rev": "npx typeorm-ts-node-commonjs migration:revert -d src/config/ormconfig-migrations.ts"
+    "migration:rev": "npx typeorm-ts-node-commonjs migration:revert -d src/config/ormconfig-migrations.ts",
+    "seed": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js seed -d dist/config/ormconfig-migrations.js"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -35,10 +36,13 @@
     "class-validator": "^0.14.0",
     "dotenv": "^16.0.3",
     "mysql2": "^3.3.1",
+    "nestjs-seeder": "^0.3.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.6.3",
+    "typeorm-extension": "^2.8.0",
+    "typeorm-seeding": "^1.6.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

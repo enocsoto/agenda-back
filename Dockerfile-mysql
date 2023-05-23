@@ -1,0 +1,7 @@
+FROM mysql
+
+# Copiar el script wait-for-it.sh al directorio /usr/local/bin dentro del contenedor
+COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
+
+# Asignar permisos de ejecución al script
+RUN chmod +x /usr/local/bin/wait-for-it.sh
