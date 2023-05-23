@@ -28,7 +28,7 @@ export class DocumentTypeSeeder implements Seeder {
     const data: Array<IDocumentType> = [];
     for (let i = 0; i < 3; i++) {
       data.push({
-        name: faker.random.words(),
+        name: `dato${i}`,
       });
     }
     return data;
